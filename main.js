@@ -8,7 +8,7 @@ app.get('/intense', (req, res) => {
     var exec = require('child_process').exec;
 
     function puts(error, stdout, stderr) { sys.puts(stdout) }
-    exec("seq 1 | xargs -P0 -n1 timeout 15 yes > /dev/null", function(err, stdout, stderr) {
+    exec("seq 1 | xargs -P0 -n1 timeout 60 yes > /dev/null", function(err, stdout, stderr) {
     console.log(stdout);
     });
 
