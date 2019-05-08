@@ -12,6 +12,5 @@ app.get('/intense', (req, res) => {
     exec("seq 1 | xargs -P0 -n1 timeout 60 yes > /dev/null", function(err, stdout, stderr) {
     console.log(stdout);
     });
-
 });
 app.listen(3000, () => console.log('Example app listening on port 3000!'));
