@@ -5,7 +5,6 @@ const app = express();
 app.get('/', (req, res) => res.send('Hello World!'));
 app.get('/intense', (req, res) => {
     res.send('CPU Load test for 60 dec');
-
     var sys = require('sys');
     var exec = require('child_process').exec;
     function puts(error, stdout, stderr) { sys.puts(stdout) }
