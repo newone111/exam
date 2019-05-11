@@ -2,8 +2,6 @@ const express = require('express');
 const { fork } = require('child_process');
 const app = express();
 
-
-
 app.get('/', (req, res) => res.send('Hello World!'));
 app.get('/intense', (req, res) => {
     res.send('CPU Load test for 60 dec');
