@@ -1,0 +1,104 @@
+For jenkins: - my jenkins pass Gotcha123@
+
+Install java (jdk and jre):
+
+sudo apt-get install default-jre
+Install nodejs:
+
+sudo apt install nodejs
+apt install nodejs-legacy (sometimes)
+
+sudo apt install npm
+npm install express
+
+install docker:
+sudo docker build . -t newone111/nodejsapp
+
+apt install docker.io
+
+Install jenkins:
+
+wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
+sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt-get update
+sudo apt-get install jenkins
+
+sudo usermod -a -G docker jenkins
+
+
+Job for jenkins.service failed because the control process exited with error code. See "systemctl status jenkins.service" and "journalctl -xe" for details.
+
+https://github.com/newone111/exam.git
+
+to load 1 code CPU for 15 sec:
+
+seq 1 | xargs -P0 -n1 timeout 15 yes > /dev/null
+
+docker build:
+sudo docker build . -t newone111/nodejsapp
+
+docker run: (8000 – exposed port , 3000 – internal docket image port)
+sudo docker run -it -p8000:3000 newone111/nodejsapp
+
+https://hub.docker.com/ - newone111/MM123
+
+GiHub tocken:  17a7692dc220f6ed4d3c1d14bbef896620fc14de
+Jenkins Created credentials with id 188c74c2-61ad-42c8-a066-ad53de8c40a9 (can use it for GitHub Server Config)
+
+
+
+https://github.com/kubernetes/dashboard/wiki/Accessing-Dashboard---1.7.X-and-above
+https://kubernetes.io/docs/reference/access-authn-authz/authentication/
+https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/
+
+vagrant@k8s:~$ kubectl get secret $(kubectl get serviceaccount dashboard -o jsonpath="{.secrets[0].name}") -o jsonpath="{.data.token}" | base64 --decode
+
+
+Install kubernetes on Ubuntu:
+first – install docker:
+https://phoenixnap.com/kb/how-to-install-docker-on-ubuntu-18-04
+
+https://linuxize.com/post/how-to-install-and-use-docker-on-ubuntu-18-04/
+
+https://vitux.com/install-and-deploy-kubernetes-on-ubuntu/
+
+https://github.com/kubernetes/dashboard/wiki/Creating-sample-user
+https://github.com/kubernetes/dashboard/wiki/Accessing-Dashboard---1.7.X-and-above
+
+token:
+
+example how to expose service :
+kubectl expose deployment mydockerapp --port=80 --target-port=3000         --name=myservice --type=LoadBalancer –external-ip=192.168.0.116
+
+autoscale:
+
+kubectl autoscale deployment mydockerapp --min=2 --max=4 --cpu-percent=30
+output: horizontalpodautoscaler.autoscaling/mydockerapp autoscaled
+
+create access: https://github.com/kubernetes/dashboard/wiki/Creating-sample-user
+
+deploy dashboard:
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended/kubernetes-dashboard.yaml
+
+change config for dashboard:
+kubectl -n kube-system edit service kubernetes-dashboard
+spec:
+  clusterIP: 10.152.183.38
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 31594
+    port: 443
+    protocol: TCP
+    targetPort: 8443
+  selector:
+    k8s-app: kubernetes-dashboard
+  sessionAffinity: None
+  type: NodePort (was ClusterIP)
+status:
+
+https://3.245.199.47:31163/#!/login
+
+kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
+
+token:
