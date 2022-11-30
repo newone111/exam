@@ -1,13 +1,26 @@
-# use a node base image
-FROM node:7-onbuild
+# Download base image ubuntu 22.04
+FROM ubuntu:22.04
 
-# set maintainer
-LABEL maintainer "newone111@hotmail.com"
+# LABEL about the custom image
+LABEL maintainer="gotchab@gmail.com"
+LABEL version="1.0"
+LABEL description="This is custom Docker Image for \
+presenting current weather in Tel Aviv."
 
-# set a health check
-HEALTHCHECK --interval=5s \
-            --timeout=5s \
-            CMD curl -f http://127.0.0.1:8000 || exit 1
+# Disable Prompt During Packages Installation
+#ARG DEBIAN_FRONTEND=noninteractive
 
-# tell docker what port to expose
-EXPOSE 8000
+# Update Ubuntu Software repository
+RUN apt update
+
+RUN apt-get install -y locales locales-all
+ENV LC_ALL en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
+
+RUN apt-get install ca-certificates -y
+RUN update-ca-certificates
+
+# Copy weather binary 
+COPY weather /usr/bin/weather  
+RUN /bin/bash
